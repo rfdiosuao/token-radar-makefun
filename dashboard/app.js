@@ -170,7 +170,7 @@
       '<span>Age <b>' + ageText(r) + '</b></span>' +
       '<span>Listed <b>' + esc(r.listed_at || 'unknown') + '</b></span>' +
       '<span>Category <b>' + esc(r.category || '—') + '</b></span>' +
-      '<span>Chains <b>' + esc(r.chains.join(', ') || '—') + '</b></span>' +
+      '<span>Chains <b>' + esc(r.chains.slice(0, 5).join(', ') + (r.chains.length > 5 ? ' +' + (r.chains.length - 5) + ' more' : '') || '—') + '</b></span>' +
       '<span>Implied value <b>' + money(r.implied_value_usd) + '</b></span></div>' +
       '<div class="breakdown">' +
       '<span class="chip">size base <b>' + money(base) + '</b></span>' +
