@@ -26,7 +26,7 @@
 //   sector  = per-category multiplier (see CATEGORY_FACTOR): lending, DEX
 //             and derivatives protocols monetise best; bridges and CEX
 //             products monetise worst and are excluded from the board anyway
-//   implied = round(size * growth * age * chains * sector * 0.35)
+//   implied = round(size * growth * age * chains * sector * 0.70)
 //
 // After scoring, rows are sorted by implied value descending (ties broken by
 // slug, ascending, so the order is deterministic) and then forced strictly
@@ -236,7 +236,7 @@ export function scoreProtocol(p: SnapshotProtocol, asOf: string): {
   const ageFactor = 0.7 + 0.6 * (Math.min(ageForModel, 1460) / 1460);
   const chainFactor = 1 + 0.08 * Math.min(Math.max(p.chains.length - 1, 0), 5);
   const sectorFactor = CATEGORY_FACTOR[p.category ?? ''] ?? 1.0;
-  const implied = Math.max(1, Math.round(size * growth * ageFactor * chainFactor * sectorFactor * 0.35));
+  const implied = Math.max(1, Math.round(size * growth * ageFactor * chainFactor * sectorFactor * 0.7));
   return { implied, age, size: Math.round(size), growth: round4(growth), ageFactor: round4(ageFactor), chainFactor: round4(chainFactor), sectorFactor };
 }
 
